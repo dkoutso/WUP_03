@@ -14,11 +14,12 @@ require(tidyverse)
 require(tigerstats)
 davisdata <- read.csv(file="UCDavis.csv")
 ```
+
 ## Our Goal is to answer this question Is there a difference between the alcohol consumed between the row
 
-$H_0$: There is no difference between the average number of drinks imbibed between people conditioned on the row they sit in.  
+$H_0$: There is no difference between the average number of drinks imbibed between people conditioned on the row they sit in.
 
-$H_A$: The average number drinks is different between at least two rows.     
+$H_A$: The average number drinks is different between at least two rows.
 
 ## you choose to sit in??
 
@@ -27,23 +28,47 @@ $H_A$: The average number drinks is different between at least two rows.
 ```{r}
 basicCN <- ggplot(davisdata,aes(y=alcohol,x=Seat))
 ```
+
 ## Now add in boxplot
 
 ```{r}
 basicCN + geom_boxplot()
 ```
-  
-  
-### get fancy  
+
+From this plot, it is observed that the people sitting in the at the back consume more alcohol.\
+The people at the front seat consume less alcohol, while the people in the middle are the next that consume more alcohol after the people at the back.
+
+### get fancy
 
 ```{r}
 basicCN + geom_boxplot(notch=TRUE,outlier.color = "red") + stat_boxplot(geom ='errorbar') + labs(title="Fancy notch boxplot \n with 2 lines")
 ```
 
-## Numerical Summarys 
+from the boxplot, the people at the back show an alcoholic consumption of 60.\
+the people at the front seat show an alcohol consumption of 20.\
+the people at the middle seat show an alcohol consumption of 35.
+
+## Numerical Summarys
+
+```{r}
+favstats(alcohol~Seat,data=davisdata)
+```
+
+The table shows the median of the people at the back is 4.\
+The median of the people in front is 0.\
+the median of the people at the middle is 1.
 
 ## Inferential Tests
 
+```{r}
+model1 <- aov(alcohol~Seat,data=davisdata)
+summary.aov(model1)
+```
+
+Based on our table, our F value is 9.656, and it is greater than the F critical value, so we  to reject the null hypothesis.  
+
+
+
 ## Conclusions
-
-
+the question was if there is a difference between the alcohol consumed between the row?  
+my conclusion is there is a difference between the alcohol consumption the row.  
