@@ -68,6 +68,13 @@ summary.aov(model1)
 Based on our table, our F value is 9.656, and it is greater than the F critical value, so we  to reject the null hypothesis.  
 
 
+```{r}
+#we specify the margins starting at the bottom and proceeding clockwise - thus 8.7 is the left side margin to hold the names of the factors
+par(mar = c(3, 8.7, 2, 2))
+plot(TukeyHSD(model1),las=2)
+```
+
+
 
 ## Conclusions
 the question was if there is a difference between the alcohol consumed between the row?  
