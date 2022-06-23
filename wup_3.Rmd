@@ -17,11 +17,13 @@ davisdata <- read.csv(file="UCDavis.csv")
 
 ## Our Goal is to answer this question Is there a difference between the alcohol consumed between the row
 
-$H_0$: There is no difference between the average number of drinks imbibed between people conditioned on the row they sit in.
-
-$H_A$: The average number drinks is different between at least two rows.
-
 ## you choose to sit in??
+
+$H_0$: There is no difference between the average number of drinks imbibed between people conditioned on the row they sit in.  
+
+$H_A$: The average number drinks is different between at least two rows.  
+
+
 
 ## Now with ggplot - first select the basic data
 
@@ -54,9 +56,9 @@ the people at the middle seat show an alcohol consumption of 35.
 favstats(alcohol~Seat,data=davisdata)
 ```
 
-The table shows the median of the people at the back is 4.\
-The median of the people in front is 0.\
-the median of the people at the middle is 1.
+The table shows the median of the people at the back is 4.  
+The median of the people in front is 0.  
+the median of the people at the middle is 1.  
 
 ## Inferential Tests
 
@@ -65,7 +67,8 @@ model1 <- aov(alcohol~Seat,data=davisdata)
 summary.aov(model1)
 ```
 
-Based on our table, our F value is 9.656, and it is greater than the F critical value, so we  to reject the null hypothesis.  
+Based on our inferential test carried out, the p-value is 0.000116.  
+Due to the p-value being less than 0.05,we reject the null hypothesis.    
 
 
 ```{r}
@@ -74,6 +77,7 @@ par(mar = c(3, 8.7, 2, 2))
 plot(TukeyHSD(model1),las=2)
 ```
 
+from the plot above, the people at the middle-front are the only people that have have a 0 passing across them.
 
 
 ## Conclusions
